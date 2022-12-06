@@ -2,24 +2,24 @@ const listItems = document.querySelector('#list');
 
 const listArr = [
   {
-    description: "Play football",
+    description: 'Play football',
     completed: false,
-    index: 1
+    index: 1,
   },
   {
-    description: "Reg for codecamp",
+    description: 'Reg for codecamp',
     completed: false,
-    index: 2
+    index: 2,
   },
   {
-    description: "Go to the gym",
+    description: 'Go to the gym',
     completed: false,
-    index: 3
+    index: 3,
   },
   {
-    description: "Party with friends",
+    description: 'Party with friends',
     completed: false,
-    index: 4
+    index: 4,
   },
 ];
 
@@ -34,8 +34,8 @@ const pushList = () => {
           <i class="fa fa-ellipsis-v"></i>
       </div>
     </li>`;
-  listItems.innerHTML += toDo;
+    listItems.innerHTML += toDo;
   });
-}
+};
 
-export {pushList};
+export default pushList;
