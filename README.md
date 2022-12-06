@@ -3,7 +3,7 @@
 
 # 📖 [TO-DO-LIST] <a name="about-project"></a>
 
-> A website that tell and shows more information about a fashion event that is held annually.
+> A TO-DO website that dynamically load user's to do list .
 
 **[TO-DO-LIST]** is a Module 2 project from microverse.
 
