@@ -3,10 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
  module.exports = {
-   entry: {
-     index: './src/index.js',
-     print: './src/print.js',
-   },
+  entry: './src/index.js',
    
    devServer: {
      static: './dist',
@@ -19,9 +16,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    ],
 
    output: {
-     filename: '[name].bundle.js',
-     path: path.resolve(__dirname, 'dist'),
+    filename: '[main].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
    },
+
 
    module: {
       rules: [
@@ -32,9 +31,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
       ],
    },
 
-   optimization: {
-    runtimeChunk: 'single',
-   },
+   
 
-   mode: 'development'
+   mode: 'none'
  };
