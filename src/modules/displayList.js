@@ -1,10 +1,10 @@
-import {listItems, addTask} from "./const.js";
+import { listItems, addTask } from './const.js';
 
 let listArr = [];
 
 const addList = () => {
   const obj = {};
-  obj.index = listArr.length;
+  obj.index = listArr.length + 1;
   obj.description = addTask.value;
   obj.completed = false;
   listArr.push(obj);
@@ -14,35 +14,48 @@ const pushToLocal = () => {
   localStorage.setItem('listArr', JSON.stringify(listArr));
 };
 
-
 const pushList = () => {
   listItems.innerHTML = '';
   listArr.forEach((obj) => {
     const toDo = `<li>
       <div><input type="checkbox"></div>
       <div class="title a-list">
-          <p>
-              ${obj.description}
-          <p>
-          <button class='delete-btn' data-id="${obj.index}"><i class="fa fa-ellipsis-v"></i></button>
+          <input data-id="${obj.index}" class= "list-input" type = "text" value = "${obj.description}">
+          <button class="delete-btn" data-id="${obj.index}"><i class="fa fa-ellipsis-v"></i></button>
       </div>
     </li>`;
     listItems.innerHTML += toDo;
-    addTask.value ='';
+    addTask.value = '';
   });
   const listRemoveBtn = document.querySelectorAll('.delete-btn');
 
   listRemoveBtn.forEach((button) => {
     button.addEventListener('click', () => {
       const dataSet = parseInt(button.dataset.id, 10);
-      const buttonId = listArr.findIndex((object) => object.id === dataSet);
-      console.log(buttonId);
+      const buttonId = listArr.findIndex((object) => object.index === dataSet);
       const deleted = (id) => {
         listArr.splice(id, 1);
+        for (let i = 0; i < listArr.length; i += 1) {
+          listArr[i].index = i + 1;
+        }
         pushList();
         localStorage.setItem('listArr', JSON.stringify(listArr));
       };
       deleted(buttonId);
+    });
+  });
+
+  const inputDescription = document.querySelectorAll('.list-input');
+  inputDescription.forEach((toDo) => {
+    toDo.addEventListener('focusout', () => {
+      const dataSet = parseInt(toDo.dataset.id, 10);
+      const toDoId = listArr.findIndex((object) => object.index === dataSet);
+      listArr[toDoId].description = toDo.value;
+      const update = () => {
+        pushList();
+        localStorage.setItem('listArr', JSON.stringify(listArr));
+      };
+      update();
     });
   });
 };
@@ -54,6 +67,6 @@ const showList = () => {
   pushList();
 };
 
-
-
-export { pushList, addList, showList, pushToLocal};
+export {
+  pushList, addList, showList, pushToLocal,
+};
