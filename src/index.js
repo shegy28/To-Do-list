@@ -1,6 +1,16 @@
 import './style.css';
-import pushList from './modules/displayList.js';
+import  { pushList, addList, showList, pushToLocal} from './modules/displayList.js';
+import {addTask} from "./modules/const.js";
 
 window.addEventListener('load', () => {
-  pushList();
+  showList();
 });
+
+addTask.addEventListener('keypress', (e) => {
+  if (e.key === "Enter") {
+    addList();
+    pushList();
+    pushToLocal();
+  }
+  
+})

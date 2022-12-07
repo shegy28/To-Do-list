@@ -1,29 +1,22 @@
-const listItems = document.querySelector('#list');
+import {listItems, addTask} from "./const.js";
 
-const listArr = [
-  {
-    description: 'Play football',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Reg for codecamp',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Go to the gym',
-    completed: false,
-    index: 3,
-  },
-  {
-    description: 'Party with friends',
-    completed: false,
-    index: 4,
-  },
-];
+let listArr = [];
+
+const addList = () => {
+  const obj = {};
+  obj.index = listArr.length;
+  obj.description = addTask.value;
+  obj.completed = false;
+  listArr.push(obj);
+};
+
+const pushToLocal = () => {
+  localStorage.setItem('listArr', JSON.stringify(listArr));
+};
+
 
 const pushList = () => {
+  listItems.innerHTML = '';
   listArr.forEach((obj) => {
     const toDo = `<li>
       <div><input type="checkbox"></div>
@@ -31,11 +24,36 @@ const pushList = () => {
           <p>
               ${obj.description}
           <p>
-          <i class="fa fa-ellipsis-v"></i>
+          <button class='delete-btn' data-id="${obj.index}"><i class="fa fa-ellipsis-v"></i></button>
       </div>
     </li>`;
     listItems.innerHTML += toDo;
+    addTask.value ='';
+  });
+  const listRemoveBtn = document.querySelectorAll('.delete-btn');
+
+  listRemoveBtn.forEach((button) => {
+    button.addEventListener('click', () => {
+      const dataSet = parseInt(button.dataset.id, 10);
+      const buttonId = listArr.findIndex((object) => object.id === dataSet);
+      console.log(buttonId);
+      const deleted = (id) => {
+        listArr.splice(id, 1);
+        pushList();
+        localStorage.setItem('listArr', JSON.stringify(listArr));
+      };
+      deleted(buttonId);
+    });
   });
 };
 
-export default pushList;
+const showList = () => {
+  if (localStorage.getItem('listArr')) {
+    listArr = JSON.parse(localStorage.getItem('listArr'));
+  }
+  pushList();
+};
+
+
+
+export { pushList, addList, showList, pushToLocal};
