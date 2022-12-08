@@ -1,8 +1,8 @@
 import './style.css';
 import {
-  pushList, addList, showList, pushToLocal,
+  pushList, addList, showList, pushToLocal, clear
 } from './modules/displayList.js';
-import { addTask } from './modules/const.js';
+import { addTask, clearAll } from './modules/const.js';
 
 window.addEventListener('load', () => {
   showList();
@@ -14,4 +14,10 @@ addTask.addEventListener('keypress', (e) => {
     pushList();
     pushToLocal();
   }
+});
+
+clearAll.addEventListener ('click', () => {
+  clear();
+  pushList();
+  pushToLocal();
 });

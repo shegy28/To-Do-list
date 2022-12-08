@@ -1,4 +1,4 @@
-import { listItems, addTask } from './const.js';
+import { listItems, addTask, clearAll } from './const.js';
 
 let listArr = [];
 
@@ -85,6 +85,10 @@ const pushList = () => {
   });
 };
 
+const clear = () => {
+  listArr = listArr.filter((obj) => obj.completed !== true);
+}
+
 const showList = () => {
   if (localStorage.getItem('listArr')) {
     listArr = JSON.parse(localStorage.getItem('listArr'));
@@ -93,5 +97,5 @@ const showList = () => {
 };
 
 export {
-  pushList, addList, showList, pushToLocal,
+  pushList, addList, showList, pushToLocal, clear
 };
