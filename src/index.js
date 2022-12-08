@@ -13,6 +13,7 @@ addTask.addEventListener('keypress', (e) => {
     addList();
     if(addTask.value == ""){
       alert("Action cant be empty");
+      showList();
     }else{
     pushList();
     pushToLocal();
