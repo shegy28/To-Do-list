@@ -18,7 +18,7 @@ const pushList = () => {
   listItems.innerHTML = '';
   listArr.forEach((obj) => {
     const toDo = `<li>
-      <div><input type="checkbox"></div>
+      <div><input class= "check-box" type="checkbox" data-id="${obj.index}"></div>
       <div class="title a-list">
           <input data-id="${obj.index}" class= "list-input" type = "text" value = "${obj.description}">
           <button class="delete-btn" data-id="${obj.index}"><i class="fa fa-ellipsis-v"></i></button>
@@ -57,6 +57,31 @@ const pushList = () => {
       };
       update();
     });
+  });
+
+  const checkBox = document.querySelectorAll('.check-box');
+  checkBox.forEach((tick) => {
+    tick.addEventListener('change', (e) => {
+      if (e.currentTarget.checked) {
+        const dataSet = parseInt(tick.dataset.id, 10);
+        const tickId = listArr.findIndex((object) => object.index === dataSet);
+        listArr[tickId].completed = true;
+        const update = () => {
+          localStorage.setItem('listArr', JSON.stringify(listArr));
+        };
+        update();
+      }else{
+        const dataSet = parseInt(tick.dataset.id, 10);
+        const tickId = listArr.findIndex((object) => object.index === dataSet);
+        listArr[tickId].completed = false;
+        const update = () => {
+          localStorage.setItem('listArr', JSON.stringify(listArr));
+        };
+        update();
+      }
+
+      
+    })
   });
 };
 
