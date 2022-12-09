@@ -1,5 +1,5 @@
 import { listItems, addTask } from './const.js';
-import {completedTrue, completedFalse}  from './checkbox.js';
+import { completedTrue, completedFalse } from './checkbox.js';
 
 let listArr = [];
 
@@ -66,23 +66,21 @@ const pushList = () => {
       if (e.currentTarget.checked) {
         const dataSet = parseInt(tick.dataset.id, 10);
         const tickId = listArr.findIndex((object) => object.index === dataSet);
-        completedTrue(listArr,tickId);
+        completedTrue(listArr, tickId);
         pushToLocal();
-      }else{
+      } else {
         const dataSet = parseInt(tick.dataset.id, 10);
         const tickId = listArr.findIndex((object) => object.index === dataSet);
-        completedFalse(listArr,tickId);
+        completedFalse(listArr, tickId);
         pushToLocal();
       }
-
-      
-    })
+    });
   });
 };
 
 const clear = () => {
   listArr = listArr.filter((obj) => obj.completed !== true);
-}
+};
 
 const showList = () => {
   if (localStorage.getItem('listArr')) {
@@ -92,5 +90,5 @@ const showList = () => {
 };
 
 export {
-  pushList, addList, showList, pushToLocal, clear
+  pushList, addList, showList, pushToLocal, clear,
 };
