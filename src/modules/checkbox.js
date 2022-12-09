@@ -1,9 +1,9 @@
-import {
-    pushList, addList, showList, pushToLocal,
-  } from './displayList.js';
+const completedTrue = (arr, id) => {
+  arr[id].completed = true;
+}
 
-window.addEventListener('load', () => {
-    showList();
-    pushList();
-    console.log(inputDescription);
-  });
+const completedFalse = (arr, id) => {
+  arr[id].completed = false;
+}
+
+export {completedTrue, completedFalse} ;

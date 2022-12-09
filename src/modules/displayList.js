@@ -1,4 +1,5 @@
-import { listItems, addTask, clearAll } from './const.js';
+import { listItems, addTask } from './const.js';
+import {completedTrue, completedFalse}  from './checkbox.js';
 
 let listArr = [];
 
@@ -65,19 +66,13 @@ const pushList = () => {
       if (e.currentTarget.checked) {
         const dataSet = parseInt(tick.dataset.id, 10);
         const tickId = listArr.findIndex((object) => object.index === dataSet);
-        listArr[tickId].completed = true;
-        const update = () => {
-          localStorage.setItem('listArr', JSON.stringify(listArr));
-        };
-        update();
+        completedTrue(listArr,tickId);
+        pushToLocal();
       }else{
         const dataSet = parseInt(tick.dataset.id, 10);
         const tickId = listArr.findIndex((object) => object.index === dataSet);
-        listArr[tickId].completed = false;
-        const update = () => {
-          localStorage.setItem('listArr', JSON.stringify(listArr));
-        };
-        update();
+        completedFalse(listArr,tickId);
+        pushToLocal();
       }
 
       

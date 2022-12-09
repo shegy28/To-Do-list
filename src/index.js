@@ -12,7 +12,7 @@ addTask.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     addList();
     if(addTask.value == ""){
-      alert("Action cant be empty");
+      alert("To-Do list can't be empty");
       showList();
     }else{
     pushList();
