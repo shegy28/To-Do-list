@@ -1,8 +1,8 @@
 import './style.css';
 import {
-  pushList, addList, showList, pushToLocal,
+  pushList, addList, showList, pushToLocal, clear,
 } from './modules/displayList.js';
-import { addTask } from './modules/const.js';
+import { addTask, clearAll } from './modules/const.js';
 
 window.addEventListener('load', () => {
   showList();
@@ -10,8 +10,18 @@ window.addEventListener('load', () => {
 
 addTask.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    addList();
-    pushList();
-    pushToLocal();
+    if (addTask.value === '') {
+      addTask.innerText += "To-Do list can't be empty";
+    } else {
+      addList();
+      pushList();
+      pushToLocal();
+    }
   }
+});
+
+clearAll.addEventListener('click', () => {
+  clear();
+  pushList();
+  pushToLocal();
 });
