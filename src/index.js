@@ -32,12 +32,9 @@ listItems.addEventListener('click', (e) => {
   if (!parentElement.classList.contains('each-list')) return;
   const eachListId = Number(parentElement.id);
   // target the data action
-  const {action} = target.dataset;
+  const { action } = target.dataset;
   if (action === 'delete') {
     deleted(eachListId);
     pushList();
   }
 });
-
-
-

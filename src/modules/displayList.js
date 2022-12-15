@@ -3,6 +3,10 @@ import { completedTrue, completedFalse } from './checkbox.js';
 
 let listArr = [];
 
+const pushToLocal = () => {
+  localStorage.setItem('listArr', JSON.stringify(listArr));
+};
+
 const addList = () => {
   const obj = {};
   obj.index = listArr.length + 1;
@@ -10,10 +14,6 @@ const addList = () => {
   obj.completed = false;
   listArr.push(obj);
   pushToLocal();
-};
-
-const pushToLocal = () => {
-  localStorage.setItem('listArr', JSON.stringify(listArr));
 };
 
 const deleted = (id) => {
@@ -27,7 +27,7 @@ const deleted = (id) => {
 const pushList = () => {
   listItems.innerHTML = '';
   listArr.forEach((obj) => {
-    const toDo = `<li class="each-list" id="${obj.index -1}">
+    const toDo = `<li class="each-list" id="${obj.index - 1}">
       <div><input class= "check-box" type="checkbox" data-id="${obj.index}"></div>
       <div class="title a-list">
           <input data-id="${obj.index}" class= "list-input" type = "text" value = "${obj.description}">
@@ -37,7 +37,7 @@ const pushList = () => {
     listItems.innerHTML += toDo;
     addTask.value = '';
   });
-  
+
   const inputDescription = document.querySelectorAll('.list-input');
   inputDescription.forEach((toDo) => {
     toDo.addEventListener('focusout', () => {

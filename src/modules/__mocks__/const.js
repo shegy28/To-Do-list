@@ -1,5 +1,7 @@
-let addTask = document.createElement("INPUT");
-addTask.setAttribute("type", "text");
-addTask.setAttribute("value", "Hello World");
+const addTask = document.createElement('INPUT');
+addTask.setAttribute('type', 'text');
+addTask.setAttribute('value', 'Hello World');
 
-export {addTask};
+const notUsed = 0;
+
+export { addTask, notUsed };
