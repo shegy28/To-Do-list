@@ -24,13 +24,11 @@ const deleted = (id) => {
   pushToLocal();
 };
 
-
-const edit = (id,value) => {
+const edit = (id, value) => {
   listArr[id].description = value;
   pushToLocal();
-}
-    
-  
+};
+
 const pushList = () => {
   listItems.innerHTML = '';
   listArr.forEach((obj) => {
