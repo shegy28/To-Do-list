@@ -1,4 +1,6 @@
-import { addList, deleted } from './displayList.js';
+import {
+  addList, deleted, clear, edit,
+} from './displayList.js';
 import { completedFalse, completedTrue } from './checkbox.js';
 
 jest.mock('./const.js');
@@ -31,5 +33,18 @@ describe('edit,update and clear function testing', () => {
     completedTrue(listArr, 1);
     localStorage.setItem('listArr', JSON.stringify(listArr));
     expect(listArr[1].completed).toBe(true);
+  });
+
+  test('Test clearAll function', () => {
+    let listArr = JSON.parse(localStorage.getItem('listArr'));
+    clear();
+    listArr = JSON.parse(localStorage.getItem('listArr'));
+    expect(listArr.length).toEqual(1);
+  });
+
+  test('test edit() function', () => {
+    edit(0, 'change task');
+    const listArr = JSON.parse(localStorage.getItem('listArr'));
+    expect(listArr[0].description).toBe('change task');
   });
 });
