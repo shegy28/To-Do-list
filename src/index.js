@@ -1,6 +1,6 @@
 import './style.css';
 import {
-  pushList, addList, showList, pushToLocal, clear, deleted,
+  pushList, addList, showList, pushToLocal, clear, deleted, edit,
 } from './modules/displayList.js';
 import { addTask, clearAll, listItems } from './modules/const.js';
 
@@ -35,6 +35,19 @@ listItems.addEventListener('click', (e) => {
   const { action } = target.dataset;
   if (action === 'delete') {
     deleted(eachListId);
+    pushList();
+  }
+});
+
+listItems.addEventListener('focusout', (e) => {
+  const { target } = e;
+  const parentElement = target.parentNode.parentNode;
+  if (!parentElement.classList.contains('each-list')) return;
+  const eachListId = Number(parentElement.id);
+  // target the data action
+  const { action } = target.dataset;
+  if (action === 'edit') {
+    edit(eachListId, target.value);
     pushList();
   }
 });
