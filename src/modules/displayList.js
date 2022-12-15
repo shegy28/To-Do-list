@@ -9,43 +9,35 @@ const addList = () => {
   obj.description = addTask.value;
   obj.completed = false;
   listArr.push(obj);
+  pushToLocal();
 };
 
 const pushToLocal = () => {
   localStorage.setItem('listArr', JSON.stringify(listArr));
 };
 
+const deleted = (id) => {
+  listArr.splice(id, 1);
+  for (let i = 0; i < listArr.length; i += 1) {
+    listArr[i].index = i + 1;
+  }
+  pushToLocal();
+};
+
 const pushList = () => {
   listItems.innerHTML = '';
   listArr.forEach((obj) => {
-    const toDo = `<li>
+    const toDo = `<li class="each-list" id="${obj.index -1}">
       <div><input class= "check-box" type="checkbox" data-id="${obj.index}"></div>
       <div class="title a-list">
           <input data-id="${obj.index}" class= "list-input" type = "text" value = "${obj.description}">
-          <button class="delete-btn" data-id="${obj.index}"><i class="fa fa-ellipsis-v"></i></button>
+          <button class="delete-btn"><i class="fa fa-trash" data-action ="delete"></i></button>
       </div>
     </li>`;
     listItems.innerHTML += toDo;
     addTask.value = '';
   });
-  const listRemoveBtn = document.querySelectorAll('.delete-btn');
-
-  listRemoveBtn.forEach((button) => {
-    button.addEventListener('click', () => {
-      const dataSet = parseInt(button.dataset.id, 10);
-      const buttonId = listArr.findIndex((object) => object.index === dataSet);
-      const deleted = (id) => {
-        listArr.splice(id, 1);
-        for (let i = 0; i < listArr.length; i += 1) {
-          listArr[i].index = i + 1;
-        }
-        pushList();
-        localStorage.setItem('listArr', JSON.stringify(listArr));
-      };
-      deleted(buttonId);
-    });
-  });
-
+  
   const inputDescription = document.querySelectorAll('.list-input');
   inputDescription.forEach((toDo) => {
     toDo.addEventListener('focusout', () => {
@@ -80,6 +72,9 @@ const pushList = () => {
 
 const clear = () => {
   listArr = listArr.filter((obj) => obj.completed !== true);
+  for (let i = 0; i < listArr.length; i += 1) {
+    listArr[i].index = i + 1;
+  }
 };
 
 const showList = () => {
@@ -90,5 +85,5 @@ const showList = () => {
 };
 
 export {
-  pushList, addList, showList, pushToLocal, clear,
+  pushList, addList, showList, pushToLocal, clear, deleted,
 };
